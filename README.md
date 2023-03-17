@@ -83,7 +83,6 @@ public sealed class MyCustomSqlExpression : SqlExpression
 ### Query
 
 ```csharp
-//TODO: return list strings. value of item is "-> regionId".
 var result = dbContext.Regions.Select(r => EF.Functions.MyCustom(r.RegionId)).ToList();
 ```
 
