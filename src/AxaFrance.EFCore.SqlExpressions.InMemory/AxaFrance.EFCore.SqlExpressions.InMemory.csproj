@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <DebugType>Full</DebugType>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>AxaFrance.EFCore.SqlExpressions.InMemory</PackageId>
+        <Version>1.0.0</Version>
+        <Authors>AxaFrance</Authors>
+        <Company>AxaFrance</Company>
+
+        <Title>AxaFrance.EFCore.SqlExpressions.InMemory</Title>
+        <Description>Use AxaFrance.EFCore.SqlExpressions.InMemory for create a custom SqlExpression on your application or on your integration test application</Description>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <RepositoryUrl>https://github.com/AxaFrance/efcore-sqlexpressions</RepositoryUrl>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <IsPackable>true</IsPackable>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="6.0.15" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\AxaFrance.EFCore.SqlExpressions\AxaFrance.EFCore.SqlExpressions.csproj" />
+    </ItemGroup>
+</Project>
