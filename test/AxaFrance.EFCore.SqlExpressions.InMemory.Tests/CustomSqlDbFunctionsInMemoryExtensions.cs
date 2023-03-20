@@ -1,7 +1,7 @@
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
-namespace EntityFrameworkCore.SqlExpressions.InMemory.Tests;
+namespace AxaFrance.EFCore.SqlExpressions.InMemory.Tests;
 
 public static class CustomSqlDbFunctionsInMemoryExtensions
 {

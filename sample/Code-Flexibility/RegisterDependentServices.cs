@@ -1,4 +1,6 @@
+using AxaFrance.EFCore.SqlExpressions;
 using Code_Flexibility.DbStore;
+using Code_Flexibility.DbStore.Expressions;
 using Code_Flexibility.HostedService;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,13 +20,21 @@ namespace Code_Flexibility
                     var configuration = context.Configuration;
                     serviceCollection
                         .AddDbContextPool<NorthwindContext>(
-                            (provider, builder) =>
-                                builder.UseSqlServer(
+                            (provider, sqlBuilder) =>
+                                sqlBuilder.UseSqlServer(
                                         configuration.GetConnectionString(nameof(NorthwindContext)),
                                         optionsBuilder =>
                                         {
                                             optionsBuilder.EnableRetryOnFailure(10)
-                                                .UseAddedExpressions();
+                                                .UseAddedExpressions(configure =>
+                                                {
+                                                    var soundexConfiguration =
+                                                        new SqlExpressionConfiguration(
+                                                            DbFunctionExtensions.DeclaringType,
+                                                            DbFunctionExtensions.SoundexMethodInfo,
+                                                            arguments => new SoundexSqlFunctionExpression(arguments));
+                                                    configure(soundexConfiguration);
+                                                });
                                         })
                                     .LogTo(message =>
                                     {

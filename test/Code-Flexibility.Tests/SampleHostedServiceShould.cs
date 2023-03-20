@@ -1,5 +1,7 @@
+using AxaFrance.EFCore.SqlExpressions.InMemory.Extensions;
 using Code_Flexibility.DbStore;
 using Code_Flexibility.HostedService;
+using EntityFrameworkCore.SqlExpressions;
 using Faker;
 using FizzWare.NBuilder;
 using FluentAssertions;
@@ -19,8 +21,10 @@ public class SampleHostedServiceShould
     {
         this.provider = new ServiceCollection()
             .AddDbContextPool<NorthwindContext>(builder =>
-                builder.UseInMemoryDatabase("Northwind", optionsBuilder => optionsBuilder
-                    .UseAddedExpressions()))
+                builder.UseInMemoryDatabase("Northwind", optionsBuilder => optionsBuilder.UseAddedExpressions(add =>
+                    add(new MethodInfoTranslatorConfiguration(
+                        DbFunctionExtensions.SoundexMethodInfo,
+                        SqlDbFunctionsInMemoryExtensions.SoundexMethodInfo)))))
             .AddScoped(_ => this.loggerMock.Object)
             .AddHostedService<SampleHostedService>()
             .BuildServiceProvider();

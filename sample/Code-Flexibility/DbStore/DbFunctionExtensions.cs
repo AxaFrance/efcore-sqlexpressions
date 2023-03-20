@@ -2,11 +2,11 @@ using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace AxaFrance.EFCore.SqlExpressions;
+namespace Code_Flexibility.DbStore;
 
-public static class SqlDbFunctionsExtensions
+public static class DbFunctionExtensions
 {
-    internal static Type DeclaringType { get; } = typeof(SqlDbFunctionsExtensions);
+    internal static Type DeclaringType { get; } = typeof(DbFunctionExtensions);
 
     public static MethodInfo SoundexMethodInfo { get; } =
         DeclaringType.GetMethod(nameof(Soundex), new[] { typeof(DbFunctions), typeof(string) })!;

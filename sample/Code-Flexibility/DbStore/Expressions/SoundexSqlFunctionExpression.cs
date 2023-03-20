@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 
 // ReSharper disable once CheckNamespace
-namespace AxaFrance.EFCore.SqlExpressions.Query;
+namespace Code_Flexibility.DbStore.Expressions;
 
 public sealed class SoundexSqlFunctionExpression : SqlFunctionExpression
 {

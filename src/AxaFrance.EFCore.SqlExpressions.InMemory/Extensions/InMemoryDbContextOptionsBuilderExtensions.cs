@@ -8,12 +8,6 @@ namespace Microsoft.EntityFrameworkCore;
 public static class InMemoryDbContextOptionsBuilderExtensions
 {
     public static InMemoryDbContextOptionsBuilder UseAddedExpressions(
-        this InMemoryDbContextOptionsBuilder builderInfrastructure)
-    {
-        return UseAddedExpressions(builderInfrastructure, default!);
-    }
-
-    public static InMemoryDbContextOptionsBuilder UseAddedExpressions(
         this InMemoryDbContextOptionsBuilder builderInfrastructure,
         Action<Action<MethodInfoTranslatorConfiguration>> configure)
     {

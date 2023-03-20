@@ -15,12 +15,6 @@ internal sealed class DbContextOptionsExtension : IDbContextOptionsExtension
 
     private DbContextOptionsExtensionInfo? info;
 
-    public DbContextOptionsExtension()
-    {
-        this.AddSqlFunction(SqlDbFunctionsExtensions.DeclaringType,
-            SqlDbFunctionsExtensions.SoundexMethodInfo, arguments => new SoundexSqlFunctionExpression(arguments));
-    }
-
     public void ApplyServices(IServiceCollection services)
     {
         foreach (var (_, factories) in this.additionalSqlFunction)

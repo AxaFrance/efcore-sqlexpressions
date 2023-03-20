@@ -7,12 +7,6 @@ namespace Microsoft.EntityFrameworkCore;
 public static class SqlDbContextOptionsBuilderExtensions
 {
     public static DbContextOptionsBuilder UseAddedExpressions(
-        this IRelationalDbContextOptionsBuilderInfrastructure builderInfrastructure)
-    {
-        return UseAddedExpressions(builderInfrastructure, default!);
-    }
-
-    public static DbContextOptionsBuilder UseAddedExpressions(
         this IRelationalDbContextOptionsBuilderInfrastructure builderInfrastructure,
         Action<Action<SqlExpressionConfiguration>> configure)
     {

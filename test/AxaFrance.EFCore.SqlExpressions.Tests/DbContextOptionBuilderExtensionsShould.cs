@@ -1,12 +1,12 @@
 using System.Diagnostics;
-using AxaFrance.EFCore.SqlExpressions;
 using Code_Flexibility.DbStore;
+using EntityFrameworkCore.SqlExpressions.Tests;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EntityFrameworkCore.SqlExpressions.Tests;
+namespace AxaFrance.EFCore.SqlExpressions.Tests;
 
 [TestFixture]
 public class DbContextOptionBuilderExtensionsShould
@@ -21,25 +21,6 @@ public class DbContextOptionBuilderExtensionsShould
     public void EndTest()
     {
         Trace.Flush();
-    }
-
-    [Test]
-    public async Task GenerateSqlQueryWithSoudexExpression()
-    {
-        await using var provider = new ServiceCollection()
-            .AddDbContextPool<NorthwindContext>(builder =>
-                builder.UseSqlServer("Data Source=fakeDataSource;Initial Catalog=FakeCatalog;",
-                    optionsBuilder => optionsBuilder.UseAddedExpressions()))
-            .BuildServiceProvider();
-        await using var dbContext = provider.GetRequiredService<NorthwindContext>();
-
-        var query = dbContext.Regions.Where(r =>
-            EF.Functions.Soundex(r.RegionDescription) == EF.Functions.Soundex("Haut de France"));
-
-        query.As<EntityQueryable<Region>>().DebugView.Query.Replace(Environment.NewLine, " ")
-            .Should()
-            .Be(
-                "SELECT [r].[RegionID], [r].[RegionDescription] FROM [Region] AS [r] WHERE SOUNDEX([r].[RegionDescription]) = SOUNDEX(N'Haut de France')");
     }
 
     [Test]

@@ -5,7 +5,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EntityFrameworkCore.SqlExpressions.InMemory.Tests;
+namespace AxaFrance.EFCore.SqlExpressions.InMemory.Tests;
 
 [TestFixture]
 public class InMemoryDbContextOptionBuilderExtensionsShould
@@ -30,7 +30,7 @@ public class InMemoryDbContextOptionBuilderExtensionsShould
         await dbContext.Regions.AddAsync(region);
         await dbContext.SaveChangesAsync();
 
-        var actualValue = dbContext.Regions.Select(r => EF.Functions.MyCustom(r.RegionId)).ToList();
+        var actualValue = dbContext.Regions.Select(r => CustomSqlDbFunctionsInMemoryExtensions.MyCustom(EF.Functions, r.RegionId)).ToList();
 
         actualValue.Should()
             .ContainSingle()

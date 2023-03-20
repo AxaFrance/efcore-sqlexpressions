@@ -1,7 +1,6 @@
 using System.Reflection;
 using AxaFrance.EFCore.SqlExpressions.InMemory.Query.Internal;
 using AxaFrance.EFCore.SqlExpressions.Query;
-using EntityFrameworkCore.SqlExpressions;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,12 +12,6 @@ internal sealed class DbContextInMemoryOptionsExtension : IDbContextOptionsExten
 {
     private readonly Dictionary<MethodInfo, MethodInfo> translateMethodInfoByOriginMethodInfo = new();
     private DbContextOptionsExtension.ExtensionInfo? info;
-
-    public DbContextInMemoryOptionsExtension()
-    {
-        this.AddOriginDeclarationTranslate(SqlDbFunctionsExtensions.SoundexMethodInfo,
-            SqlDbFunctionsInMemoryExtensions.SoundexMethodInfo);
-    }
 
     public void ApplyServices(IServiceCollection services)
     {

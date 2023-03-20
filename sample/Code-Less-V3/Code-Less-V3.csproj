@@ -28,15 +28,14 @@
         <Compile Update="**\*.partial.cs">
             <DependentUpon>$([System.String]::Copy(%(Filename)).Replace('.partial', '.cs'))</DependentUpon>
         </Compile>
+        <Compile Include="..\Code-Flexibility\DbStore\Expressions\SoundexSqlFunctionExpression.cs">
+          <Link>DbStore\Expressions\SoundexSqlFunctionExpression.cs</Link>
+        </Compile>
     </ItemGroup>
 
     <ItemGroup>
         <None Update="appsettings.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </None>
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\src\AxaFrance.EFCore.SqlExpressions\AxaFrance.EFCore.SqlExpressions.csproj" />
     </ItemGroup>
 </Project>
