@@ -11,7 +11,7 @@ namespace Code_Flexibility
         public static IHostBuilder Configure(this IHostBuilder hostBuilder)
         {
             return hostBuilder.ConfigureHostConfiguration(
-                    builder => builder.AddEnvironmentVariables()
+                    builder => builder.AddEnvironmentVariables(prefix: "ASPNETCORE_")
                         .AddJsonFile("appsettings.json", false))
                 .ConfigureLogging(
                     (context, builder) =>

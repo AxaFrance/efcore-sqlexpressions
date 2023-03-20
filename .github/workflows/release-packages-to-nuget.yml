@@ -29,19 +29,17 @@ jobs:
       with: 
         nuget-version: '5.x'
     - name: Restore NuGet Packages
-      run: nuget restore AxaFrance.Extensions.DependencyInjection.sln
+      run: nuget restore efcore-sqlexpressions.sln
            
     # Build solution
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
     - name: Build
       run: |
-        msbuild AxaFrance.Extensions.DependencyInjection.sln
+        msbuild efcore-sqlexpressions.sln
 
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.Extensions.DependencyInjection.WebApi/AxaFrance.Extensions.DependencyInjection.WebApi.csproj
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.Extensions.DependencyInjection.Owin/AxaFrance.Extensions.DependencyInjection.Owin.csproj
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.Extensions.DependencyInjection.Mvc/AxaFrance.Extensions.DependencyInjection.Mvc.csproj
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.Extensions.DependencyInjection.WCF/AxaFrance.Extensions.DependencyInjection.WCF.csproj
+    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions/AxaFrance.EFCore.SqlExpressions.csproj
+    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions.InMemory/AxaFrance.EFCore.SqlExpressions.InMemory.csproj
     
     - uses: actions/upload-artifact@v3
       with:

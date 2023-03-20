@@ -1,6 +1,6 @@
 # EntityFrameworkCore.SqlExpressions
 
-EntityFrameworkCore.SqlExpressions permet d'enregistrer des SqlExpressions simplement dans le mecannisme de rendu d'
+EntityFrameworkCore.SqlExpressions permet d'enregistrer des SqlExpressions simplement dans le mecanisme de rendu d'
 EntityFramework
 
 ## EntityFrameworkCore.SqlExpressions.InMemory

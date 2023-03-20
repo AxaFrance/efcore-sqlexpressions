@@ -1,12 +1,12 @@
 name: CI
-
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
   pull_request:
-    branches: [ "main" ]
+    types: [main, opened, synchronize, reopened]
   workflow_dispatch:
-    
+      
 
 jobs:
   build-windows:
@@ -58,7 +58,7 @@ jobs:
       with: 
         nuget-version: '5.x'
     - name: Restore NuGet Packages
-      run: nuget restore AxaFrance.EFCore.SqlExpressions.sln
+      run: nuget restore efcore-sqlexpressions.sln
     
     # Prepare SonarCloud
     - name: Prepare SonarCloud
@@ -67,14 +67,14 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       shell: powershell
       run: |
-        .\.sonar\scanner\dotnet-sonarscanner begin /k:"AxaGuilDEv_efcore-sqlexpressions" /o:"axaguildev" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=./TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=./**/coverage.opencover.xml /d:sonar.coverage.exclusions=./test/**/*.* /d:sonar.verbose=true
+          .\.sonar\scanner\dotnet-sonarscanner begin /k:"AxaFrance_efcore-sqlexpressions" /o:"axaguildev" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.cs.vstest.reportsPaths=./TestResults/*.trx /d:sonar.cs.opencover.reportsPaths=./**/coverage.opencover.xml /d:sonar.coverage.exclusions=./test/**/*.* /d:sonar.verbose=true
         
     # Build solution
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
     - name: Build
       run: |
-        msbuild AxaFrance.EFCore.SqlExpressions.sln
+        msbuild efcore-sqlexpressions.sln
 
     # Run Tests
     # - name: Run Tests
