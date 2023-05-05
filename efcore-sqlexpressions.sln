@@ -43,6 +43,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Code-Less.Tests", "test\Cod
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AxaFrance.EFCore.SqlExpressions.Tests", "test\AxaFrance.EFCore.SqlExpressions.Tests\AxaFrance.EFCore.SqlExpressions.Tests.csproj", "{F0340378-FB17-4406-B2B4-140F06E95491}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{B0437C77-8C08-4F98-A556-5EC243860FE7}"
+	ProjectSection(SolutionItems) = preProject
+		src\Common\AssemblyInfo.cs = src\Common\AssemblyInfo.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
