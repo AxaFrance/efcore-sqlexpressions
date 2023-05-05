@@ -38,12 +38,17 @@ jobs:
       run: |
         msbuild efcore-sqlexpressions.sln
 
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions/AxaFrance.EFCore.SqlExpressions.csproj
-    - run: dotnet pack -o output /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions.InMemory/AxaFrance.EFCore.SqlExpressions.InMemory.csproj
+    - run: dotnet pack -o nuget /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions/AxaFrance.EFCore.SqlExpressions.csproj
+    - run: dotnet pack -o nuget /p:ContinuousIntegrationBuild=true -p:PackageVersion=${{ steps.gitversion.outputs.nuGetVersionV2 }} -c Release ./src/AxaFrance.EFCore.SqlExpressions.InMemory/AxaFrance.EFCore.SqlExpressions.InMemory.csproj
     
     - uses: actions/upload-artifact@v3
       with:
         name: packages
         path: |
-          output/*.nupkg
-          output/*.snupkg
+          nuget/*.nupkg
+          nuget/*.snupkg
+          
+    - name: Publish Nuget to GitHub registry
+      run: | 
+        dotnet nuget push 'nuget/AxaFrance.EFCore.SqlExpressions.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg' -k ${{ secrets.NUGET_TOKEN }} -s 'https://api.nuget.org/v3/index.json' --skip-duplicate 
+        dotnet nuget push 'nuget/AxaFrance.EFCore.SqlExpressions.InMemory.${{ steps.gitversion.outputs.nuGetVersionV2 }}.nupkg' -k ${{ secrets.NUGET_TOKEN }} -s 'https://api.nuget.org/v3/index.json' --skip-duplicate
